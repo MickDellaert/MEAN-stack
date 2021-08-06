@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const app = express();
 
-const Friend = require('./models/friend');
+const friendController = require('./controllers/friendController');
 
 
 const port = 9055;
@@ -29,38 +29,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.get('/', (req, res) => {
-    res.send('Hello World')
-});
-
-app.get('/add-friend',(req, res) => {
-    const friend = new Friend({
-        firstname: 'test',
-        lastname: 'dellaert',
-        email: 'mickdellaert@gmail.com',
-        phonenumber: '0488244705',
-        language: 'css'
-    });
-
-    friend.save()
-        .then((result) => {
-            res.send(result)
-        })
-        .catch((err) => {
-            console.log(err);
-        });
-});
-
-app.get('/all-friends',(req, res) => {
-    Friend.find()
-        .then((result) => {
-            res.send(result);
-        })
-        .catch((err) => {
-            console.log(err);
-        })
+    res.send('Hello World!')
 });
 
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
 });
+
+app.use('/', friendController)
