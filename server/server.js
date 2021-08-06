@@ -3,6 +3,9 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const app = express();
 
+const Friend = require('./models/friend');
+
+
 const port = 9055;
 
 const dbConnection = 'mongodb+srv://mick:meandbmick@cluster0.xt8j9.mongodb.net/friendbook?retryWrites=true&w=majority'
@@ -27,9 +30,27 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 app.get('/', (req, res) => {
     res.send('Hello World')
-})
+});
+
+app.get('/add-friend',(req, res) => {
+    const friend = new Friend({
+        firstname: 'test',
+        lastname: 'dellaert',
+        email: 'mickdellaert@gmail.com',
+        phonenumber: '0488244705',
+        language: 'css'
+    });
+
+    friend.save()
+        .then((result) => {
+            res.send(result)
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+});
 
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
-})
+});
