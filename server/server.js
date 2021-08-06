@@ -47,6 +47,16 @@ app.get('/add-friend',(req, res) => {
         })
         .catch((err) => {
             console.log(err);
+        });
+});
+
+app.get('/all-friends',(req, res) => {
+    Friend.find()
+        .then((result) => {
+            res.send(result);
+        })
+        .catch((err) => {
+            console.log(err);
         })
 });
 
