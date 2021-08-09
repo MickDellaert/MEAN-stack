@@ -10,7 +10,7 @@ const port = 9055;
 
 const dbConnection = 'mongodb+srv://mick:meandbmick@cluster0.xt8j9.mongodb.net/friendbook?retryWrites=true&w=majority'
 
-mongoose.connect(dbConnection, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(dbConnection, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
     .then((result) => console.log('connected to database'))
     .catch((err) => console.log(err))
 
@@ -37,4 +37,4 @@ app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
 });
 
-app.use('/', friendController)
+app.use('/friends', friendController)
