@@ -5,7 +5,7 @@ import { Friend } from "../friend";
 @Injectable({
   providedIn: 'root'
 })
-export class AddFriendService {
+export class FriendService {
   baseUrl: string = "http://localhost:9055/friends";
 
   constructor(private http: HttpClient) {

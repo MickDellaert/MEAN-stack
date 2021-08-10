@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {AddFriendService} from "../../services/add-friend.service";
+import {FriendService} from "../../services/friend.service";
 
 @Component({
   selector: 'app-friend-list',
@@ -8,7 +8,9 @@ import {AddFriendService} from "../../services/add-friend.service";
 })
 export class FriendListComponent implements OnInit {
 
-  public friends: any = [{
+  public friends: any = [];
+
+   /* {
     _id: '1',
     firstname: 'testfirstname1',
     lastname: 'testlastname1',
@@ -29,14 +31,13 @@ export class FriendListComponent implements OnInit {
     email: 'testemail3',
     phonenumber: '12345678',
     language: 'css'
-  }];
+  };*/
 
-  constructor(private addFriendService: AddFriendService) {
+  constructor(private friendService: FriendService) {
   }
 
   ngOnInit(): void {
 
-    this.addFriendService.getMeanFriends().subscribe(friends => {console.log('list of friends', friends);
-    })
+    this.friendService.getMeanFriends().subscribe(friends => {this.friends = friends})
   }
 }
