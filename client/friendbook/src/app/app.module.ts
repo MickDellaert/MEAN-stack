@@ -5,11 +5,13 @@ import { AppComponent } from './app.component';
 import { FormsModule} from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { FormComponent } from './components/form/form.component';
+import { FriendListComponent } from './components/friend-list/friend-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FormComponent,
+    FriendListComponent,
   ],
   imports: [
     BrowserModule,
