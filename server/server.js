@@ -24,9 +24,17 @@ mongoose.connect(dbConnection, { useNewUrlParser: true, useUnifiedTopology: true
 //     console.log('connected!');
 // });
 
-
+// -- bodyParser middleware todo
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+
+// -- Fixing cors policy error
+app.all("/*", function(req, res, next){
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+    next();
+});
 
 app.get('/', (req, res) => {
     res.send('Hello World!')
