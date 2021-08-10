@@ -22,6 +22,18 @@ router.post('/',(req, res) => {
         });
 });
 
+// -- Getting all friends with async await using find method
+router.get('/', async (req, res) => {
+    try {
+        const friends = await Friend.find({});
+        res.status(200).send(friends);
+    } catch (error) {
+        res.status(500).send(error);
+    }
+});
+
+/*
+// -- Getting all friends with then/catch
 router.get('/',(req, res) => {
     Friend.find()
         .then((result) => {
@@ -31,7 +43,9 @@ router.get('/',(req, res) => {
             console.log(err);
         })
 });
+*/
 
+// -- Getting one friend with findById function
 router.get('/:id',(req, res) => {
     if(!ObjectId.isValid(req.params.id))
         return res.status(400).send(`No record with given id : ${req.params.id}`);
@@ -45,6 +59,7 @@ router.get('/:id',(req, res) => {
         })
 });
 
+// -- Update a friend using put and findByIdAndUpdate method
 router.put('/:id', (req, res) => {
     if(!ObjectId.isValid(req.params.id))
         return res.status(400).send(`No record with given id : ${req.params.id}`);
@@ -65,6 +80,8 @@ router.put('/:id', (req, res) => {
         })
 });
 
+
+// Delete friend using delete and findByIdAndRemove method
 router.delete('/:id',(req, res) => {
     if(!ObjectId.isValid(req.params.id))
         return res.status(400).send(`No record with given id : ${req.params.id}`);
